@@ -2,8 +2,8 @@
 
 A practical, framework-free HTML component library focused on clarity, accessibility, and real-world use.
 
-Live site: https://www.lukedunsmore.com/html-component-library.html
-Offline PDF Version: https://www.lukedunsmore.com/wp-content/uploads/2025/12/html-component-library.pdf
+- Live site: https://www.lukedunsmore.com/html-component-library.html
+- Offline PDF Version: https://www.lukedunsmore.com/wp-content/uploads/2025/12/html-component-library.pdf
 
 ## About
 
