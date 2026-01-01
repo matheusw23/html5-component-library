@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Component Library</title>
+    <style>
+        :root {
+            --bg-code: #1e1e1e;
+            --bg-card: #ffffff;
+            --text-main: #333;
+            --text-code: #9cdcfe; 
+            --border: #e2e8f0;
+            
+            /* FONT OPTIONS */
+            --font-main: "DM Sans", sans-serif;
+            
+            /* Defined Font Variables */
+            --font-header-title: "League Spartan", sans-serif;
+            --font-grid-header: "League Spartan", sans-serif;
+            --font-mono: "Fira Code", "Consolas", "Monaco", monospace;
+            
+            /* Category Colours */
+            --col-patterns: #8b5cf6; /* Purple */
+            --col-text: #3b82f6;     /* Blue */
+            --col-forms: #10b981;    /* Green */
+            --col-lists: #f59e0b;    /* Amber */
+            --col-media: #ec4899;    /* Pink */
+            --col-interact: #06b6d4; /* Cyan */
+            --col-code: #6366f1;     /* Indigo */
+            --col-structure: #64748b;/* Slate */
+            --col-tables: #d946ef;   /* Fuchsia */
+            --col-default: #71717a;  /* Grey */
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: var(--font-main);
+            color: var(--text-main);
+            /* Sunset Gradient */
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 50%, #f5576c 100%);
+            min-height: 100vh;
+            padding-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Header --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: relative; /* Changed from sticky */
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Flex container to separate Left (Title/Intro) and Right (Search/Button) */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            gap: 2rem;
+        }
+
+        /* LEFT SIDE: Title & Intro Paragraph */
+        .header-left {
+            flex: 1;
+            max-width: 650px;
+        }
+
+        .header-title h1 { 
+            margin: 0 0 0.5rem 0; 
+            font-size: 2rem; 
+            letter-spacing: -0.5px;
+            font-family: var(--font-header-title); 
+            font-weight: 700;
+            
+            /* Gradient Text Implementation */
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 50%, #f5576c 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; 
+        }
+
+        .header-intro {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #666;
+            font-family: var(--font-main);
+        }
+
+        /* RIGHT SIDE: Search & Back Button */
+        .header-right {
+            width: 300px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        .search-wrapper svg {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            width: 18px;
+            height: 18px;
+        }
+        .search-wrapper input {
+            padding: 0.7rem 1rem 0.7rem 2.5rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            font-family: var(--font-main);
+        }
+        .search-wrapper input:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+
+        /* Back Button (Header) */
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 50%, #f5576c 100%);
+            color: #111;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+        }
+
+        /* --- Filter Buttons --- */
+        .filter-row { 
+            display: flex; 
+            gap: 0.6rem; 
+            flex-wrap: wrap; 
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .filter-btn {
+            background: #f3f4f6;
+            border: 1px solid transparent;
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.2s ease;
+            font-family: var(--font-main);
+        }
+        .filter-btn:hover { background: #e5e7eb; transform: translateY(-1px); }
+        
+        .filter-btn.active {
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        /* --- Main Layout --- */
+        main {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        .grid-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            color: #111;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            padding: 0 0.5rem;
+            opacity: 0.8;
+            font-family: var(--font-grid-header);
+        }
+
+        .component-wrapper {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 1rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255,255,255,0.6);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .split-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 0;
+            align-items: stretch;
+        }
+
+        /* --- Code Box --- */
+        .code-box {
+            background: var(--bg-code);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #333;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            height: 100%;
+        }
+
+        .code-header {
+            background: #252526;
+            padding: 0.6rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .comp-title { color: #fff; font-weight: bold; font-family: var(--font-mono); font-size: 0.9rem; }
+        
+        .comp-cat { 
+            font-size: 0.7rem; 
+            color: #fff; 
+            padding: 3px 8px; 
+            border-radius: 4px; 
+            margin-left: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .code-box pre {
+            margin: 0;
+            padding: 1.5rem;
+            overflow-x: auto;
+            color: var(--text-code);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            background: var(--bg-code);
+            flex: 1;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid #555;
+            color: #aaa;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: 0.2s;
+            font-family: var(--font-main);
+        }
+        .copy-btn:hover { border-color: #fff; color: #fff; }
+
+        /* --- Preview Box --- */
+        .preview-box {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 200px;
+            overflow: hidden; /* Prevent spillover */
+        }
+        
+        .preview-content { width: 100%; }
+
+        /* --- Description Footer --- */
+        .desc-box {
+            background: #fff;
+            margin-top: 1rem;
+            padding: 1.25rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #444;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .desc-icon {
+            font-weight: 800;
+            font-size: 0.75rem;
+            margin-top: 3px;
+            white-space: nowrap;
+            color: var(--col-default);
+            font-family: var(--font-header-title);
+        }
+        
+        .desc-box code, .desc-box kbd {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            color: #d63384;
+        }
+
+        /* --- New Footer Styling --- */
+        .site-footer {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.6);
+            backdrop-filter: blur(5px);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+        }
+
+        .footer-logo {
+            max-width: 200px;
+            height: auto;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        .footer-logo:hover { opacity: 1; }
+
+        .footer-links {
+            font-size: 0.9rem;
+            color: #444;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dotted #666;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: #000; border-bottom-style: solid; }
+        .separator { margin: 0 0.5rem; color: #999; }
+
+        .footer-disclaimer {
+            font-size: 0.8rem;
+            color: #666;
+            max-width: 600px;
+            line-height: 1.5;
+            font-style: italic;
+        }
+        
+        .footer-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            background: #fff;
+            color: #333;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+        .footer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            color: #000;
+        }
+
+        @media (max-width: 900px) {
+            .header-top { flex-direction: column; align-items: stretch; gap: 1rem; }
+            .header-left { max-width: 100%; }
+            .header-right { width: 100%; }
+            .split-row { grid-template-columns: 1fr; }
+            .grid-header { display: none; }
+            /* Reduced padding on mobile to fix overflow */
+            main { padding: 1rem 0.5rem; }
+            .preview-box { padding: 1rem; }
+            .site-footer { border-radius: 0; border: none; }
+        }
+        /* --- Header Meta + OSS Buttons --- */
+        .meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.9rem;
+            align-items: center;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.7);
+            color: #333;
+            white-space: nowrap;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+        }
+        .pill svg { width: 14px; height: 14px; opacity: 0.75; }
+
+        .btn-row {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            width: 100%;
+        }
+        .btn svg { width: 18px; height: 18px; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 50%, #f5576c 100%);
+            color: #111;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.28);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: #111;
+            border: 2px solid rgba(0,0,0,0.08);
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+            border-color: rgba(0,0,0,0.14);
+        }
+
+        .btn-secondary .muted {
+            font-weight: 800;
+            opacity: 0.8;
+        }
+
+        .oss-line {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: #444;
+        }
+        .oss-line a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px dotted #666;
+            transition: color 0.2s, border-bottom-style 0.2s;
+        }
+        .oss-line a:hover { color: #000; border-bottom-style: solid; }
+        .oss-line svg { width: 16px; height: 16px; opacity: 0.8; }
+
+        .tiny-sep { color: #999; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-top">
+            <div class="header-left">
+                <div class="header-title">
+                    <h1>HTML5 Component Library</h1>
+                </div>
+                <p class="header-intro">
+                    Welcome to your personal HTML building block collection. Browse, filter, and copy pre-styled code snippets for every standard component you need to build responsive websites.
+                </p>
+                <div class="meta-row" aria-label="Project metadata">
+                    <span class="pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+                        </svg>
+                        Framework-free
+                    </span>
+                    <span class="pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+                        </svg>
+                        Open source
+                    </span>
+                    <span class="pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M10 13a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1"/><path d="M14 11a5 5 0 0 1 0 7l-1 1a5 5 0 0 1-7-7l1-1"/>
+                        </svg>
+                        MIT Licensed
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="header-right">
+                <div class="search-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Search components...">
+                </div>
+                
+                <div class="btn-row">
+                    <a href="https://github.com/lukedunsmoto/html5-component-library" class="btn btn-secondary" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+                        </svg>
+                        <span><span class="muted">View on GitHub</span></span>
+                    </a>
+
+                    <a href="https://github.com/lukedunsmoto/html5-component-library/issues/new/choose" class="btn btn-secondary" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"/>
+                            <path d="M8 9h8M8 13h6"/>
+                        </svg>
+                        <span><span class="muted">Suggest a Component</span></span>
+                    </a>
+
+                    <a href="https://lukedunsmore.com" class="btn btn-primary">Back to LukeDunsmore.com</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="filter-row" id="filterContainer">
+            </div>
+    </header>
+
+    <main id="mainContainer">
+        <div class="grid-header">
+            <div>Source Code</div>
+            <div>Rendered Preview</div>
+        </div>
+        </main>
+
+    <footer class="site-footer">
+        <a href="https://lukedunsmore.com">
+            <img src="https://www.lukedunsmore.com/wp-content/uploads/2025/11/Luke-Dunsmore-Labs-Logo-250-x-125px.svg" alt="Luke Dunsmore Labs" class="footer-logo">
+        </a>
+        
+        <div class="footer-links">
+            <span>v1.0.0</span>
+            <span class="separator">–</span>
+            <a href="https://www.lukedunsmore.com/privacy-policy/">Privacy Policy</a>
+            <span class="separator">–</span>
+            <a href="https://www.lukedunsmore.com/terms-of-use/">Terms of Use</a>
+        </div>
+
+
+        <div class="oss-line" aria-label="Open source links">
+            <span>Open-Source Under the <strong>MIT</strong> License</span>
+            <span class="separator">–</span>
+            <span class="tiny-sep">·</span>
+            <a href="https://github.com/lukedunsmoto/html5-component-library" target="_blank" rel="noopener">
+                <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+                </svg>
+                GitHub Repo
+            </a>
+            <span class="separator">–</span>
+            <span class="tiny-sep">·</span>
+            <a href="https://github.com/lukedunsmoto/html5-component-library/issues/new/choose" target="_blank" rel="noopener">Suggest a Component</a>
+        </div>
+
+        <div class="footer-disclaimer">
+            This is an experimental tool. Always double-check outputs. The Developer accepts no liability and provides no warranty or accuracy guarantee.
+        </div>
+        
+        <div class="footer-links"><a href="https://lukedunsmore.com" class="footer-btn">Return to LukeDunsmore.com</a>
+        <a href="https://www.lukedunsmore.com/wp-content/uploads/2025/12/html-component-library.pdf" class="footer-btn">Download as PDF</a>
+        </div>
+    </footer>
+
+    <script>
+        // === COLOURS ===
+        const categoryColors = {
+            'Patterns': 'var(--col-patterns)',
+            'Text': 'var(--col-text)',
+            'Forms': 'var(--col-forms)',
+            'Lists': 'var(--col-lists)',
+            'Media': 'var(--col-media)',
+            'Interact': 'var(--col-interact)',
+            'Code': 'var(--col-code)',
+            'Structure': 'var(--col-structure)',
+            'Tables': 'var(--col-tables)'
+        };
+
+        // === DATA ===
+        // NOTE: Updated fixed widths to percentages or max-width for mobile safety.
+        const components = [
+            // --- PATTERNS ---
+            { 
+                cat: "Patterns", 
+                name: "Basic Card", 
+                desc: "A common UI pattern. Use a <code>div</code> with border-radius, padding, and box-shadow to group related content.",
+                html: `<div style="border: 1px solid #ddd; border-radius: 12px; padding: 20px; width: 100%; max-width: 300px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); background: #fff;">\n  <img src="https://placehold.co/300x150" alt="Card cap" style="width:100%; border-radius:8px; margin-bottom:15px;">\n  <h3 style="margin: 0 0 10px 0;">Card Title</h3>\n  <p style="color: #666; margin-bottom: 15px;">A quick summary of the card content goes here.</p>\n  <button style="background: #8b5cf6; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight:600;">Action</button>\n</div>` 
+            },
+            { 
+                cat: "Patterns", 
+                name: "Flex Navbar", 
+                desc: "Uses <code>display: flex</code> to align items horizontally. Now features a 3px border and 15px radius as requested.",
+                html: `<nav style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #fff; border: 3px solid #e2e8f0; border-radius: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">\n  <div style="font-weight: 800; color:#333;">BRAND</div>\n  <div style="display:flex; gap:20px;">\n    <a href="#" style="text-decoration: none; color: #555;">Home</a>\n    <a href="#" style="text-decoration: none; color: #555;">Features</a>\n    <a href="#" style="text-decoration: none; color: #3b82f6; font-weight:bold;">Login</a>\n  </div>\n</nav>` 
+            },
+            { 
+                cat: "Patterns", 
+                name: "Hero Section", 
+                desc: "A high-impact section with a gradient background. Centered text with a call to action.",
+                html: `<div style="background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%); color: white; padding: 60px 20px; text-align: center; border-radius: 12px; max-width: 100%;">\n  <h1 style="margin: 0 0 15px 0; font-size: 2.5rem;">Welcome to HTML5</h1>\n  <p style="font-size: 1.1rem; opacity: 0.9;">Build beautiful websites with simple markup.</p>\n  <button style="margin-top: 20px; padding: 12px 24px; border: none; background: white; color: #2563eb; font-weight: bold; border-radius: 6px; cursor: pointer;">Get Started</button>\n</div>` 
+            },
+            { 
+                cat: "Patterns", 
+                name: "Flex Center", 
+                desc: "The easiest way to center an item vertically and horizontally: <code>display:flex</code>, <code>justify-content:center</code>, <code>align-items:center</code>.",
+                html: `<div style="display: flex; justify-content: center; align-items: center; height: 150px; background: #e0e7ff; border: 1px dashed #2563eb; border-radius:8px;">\n  <div style="background: #2563eb; color: white; padding: 10px 20px; border-radius:4px;">I am Centered!</div>\n</div>` 
+            },
+            { 
+                cat: "Patterns", 
+                name: "Grid Gallery", 
+                desc: "Uses <code>display: grid</code> with <code>grid-template-columns</code>. Colours are now darker for better contrast against white backgrounds.",
+                html: `<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">\n  <div style="background: #3b82f6; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:4px; color:white; font-weight:bold;">1</div>\n  <div style="background: #6366f1; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:4px; color:white; font-weight:bold;">2</div>\n  <div style="background: #8b5cf6; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:4px; color:white; font-weight:bold;">3</div>\n  <div style="background: #ec4899; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:4px; color:white; font-weight:bold;">4</div>\n  <div style="background: #f43f5e; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:4px; color:white; font-weight:bold;">5</div>\n  <div style="background: #f97316; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:4px; color:white; font-weight:bold;">6</div>\n</div>` 
+            },
+
+            // --- TEXT ---
+            { 
+                cat: "Text", 
+                name: "Headings", 
+                desc: "Headings provide document structure. Use <code>h1</code> for the main title, <code>h2</code> for sections, etc.",
+                html: `<h1>Heading 1</h1>\n<h2>Heading 2</h2>\n<h3>Heading 3</h3>\n<h4>Heading 4</h4>\n<h5>Heading 5</h5>\n<h6>Heading 6</h6>` 
+            },
+            { 
+                cat: "Text", 
+                name: "Paragraphs", 
+                desc: "The default container for text. Browsers add vertical margin automatically.",
+                html: `<p>This is a paragraph. It has default spacing (margin) above and below it to separate it from other elements.</p>\n<p>This is a second paragraph.</p>` 
+            },
+            { 
+                cat: "Text", 
+                name: "Inline Styling", 
+                desc: "Use <code>strong</code> for importance (bold), <code>em</code> for stress (italics), and <code>mark</code> for highlighting.",
+                html: `<p><strong>Bold (Strong)</strong></p>\n<p><em>Italic (Emphasis)</em></p>\n<p><mark>Highlighted</mark></p>\n<p><del>Deleted</del> & <ins>Inserted</ins></p>` 
+            },
+            { 
+                cat: "Text", 
+                name: "Formatting", 
+                desc: "Subscript and Superscript are used for math or chemical formulas. Small is for fine print.",
+                html: `<p>H<sub>2</sub>O (Subscript)</p>\n<p>E=mc<sup>2</sup> (Superscript)</p>\n<p><small>Copyright 2024 (Small text)</small></p>` 
+            },
+            { 
+                cat: "Text", 
+                name: "Quotations", 
+                desc: "Use <code>blockquote</code> for longer, indented quotes. Use <code>q</code> for inline quotes.",
+                html: `<blockquote style="border-left: 4px solid #ccc; margin: 10px 0; padding-left: 15px; font-style: italic; color: #555;">\n  "Design is not just what it looks like and feels like. Design is how it works."\n  <div style="font-style: normal; margin-top: 5px; font-weight:bold; font-size:0.8rem;">— Steve Jobs</div>\n</blockquote>\n<p>As he once said: <q>Stay hungry, stay foolish.</q></p>` 
+            },
+            { 
+                cat: "Text", 
+                name: "Address", 
+                desc: "Defines contact information for the author/owner of a document.",
+                html: `<address style="font-style: italic;">\n  Written by <a href="mailto:webmaster@example.com">John Doe</a>.<br>\n  Visit us at:<br>\n  Example.com<br>\n  Box 564, Disneyland\n</address>` 
+            },
+            { 
+                cat: "Text", 
+                name: "Abbreviations", 
+                desc: "The <code>abbr</code> tag provides a tooltip when you hover over the text.",
+                html: `<p>The <abbr title="World Health Organization">WHO</abbr> was founded in 1948.</p>` 
+            },
+            { 
+                cat: "Text", 
+                name: "Ruby (East Asian)", 
+                desc: "Used for showing pronunciation of East Asian characters (like Furigana in Japanese).",
+                html: `<ruby>\n  漢 <rp>(</rp><rt>Kan</rt><rp>)</rp>\n  字 <rp>(</rp><rt>ji</rt><rp>)</rp>\n</ruby>` 
+            },
+            
+            // --- FORMS ---
+            { 
+                cat: "Forms", 
+                name: "Text Inputs", 
+                desc: "Basic fields for user data. Always use a <code>label</code> for accessibility.",
+                html: `<label style="display:block; margin-bottom:5px; font-weight:bold;">Email Address</label>\n<input type="email" placeholder="you@example.com" style="padding:10px; border:1px solid #ccc; border-radius:4px; width:100%;">` 
+            },
+            { 
+                cat: "Forms", 
+                name: "Buttons", 
+                desc: "Use <code>button</code> for actions. Styles can be easily overridden with CSS.",
+                html: `<button style="padding:8px 16px;">Default Button</button>\n<input type="button" value="Input Button" style="padding:8px 16px;">\n<button disabled style="padding:8px 16px;">Disabled</button>` 
+            },
+            { 
+                cat: "Forms", 
+                name: "Checkboxes & Radios", 
+                desc: "Checkboxes allow multiple selections. Radio buttons allow only one selection per group (share the same <code>name</code>).",
+                html: `<div style="margin-bottom:10px;">\n  <label><input type="checkbox" checked> Subscribe to newsletter</label>\n</div>\n<div>\n  <p style="margin:0 0 5px 0; font-weight:bold;">Plan:</p>\n  <label><input type="radio" name="plan"> Free</label>\n  <label style="margin-left:15px;"><input type="radio" name="plan"> Pro</label>\n</div>` 
+            },
+            {
+                cat: "Forms",
+                name: "Dropdown (Select)",
+                desc: "A collapsible menu of options. Good for saving space.",
+                html: `<label>Choose a car:</label>\n<select style="padding:5px; border-radius:4px;">\n  <option value="">Select...</option>\n  <option value="volvo">Volvo</option>\n  <option value="saab">Saab</option>\n  <option value="mercedes">Mercedes</option>\n  <option value="audi">Audi</option>\n</select>`
+            },
+            {
+                cat: "Forms",
+                name: "Textarea",
+                desc: "A multi-line text input control. Great for comments or long messages.",
+                html: `<label>Comments:</label><br>\n<textarea rows="4" style="width:100%; border-color:#ccc; border-radius:4px;">Type your message here...</textarea>`
+            },
+            {
+                cat: "Forms",
+                name: "Special Inputs",
+                desc: "HTML5 provides native pickers for colour, date, and ranges.",
+                html: `<div style="display:flex; gap:20px; align-items:center;">\n  <label>Colour: <input type="color"></label>\n  <label>Date: <input type="date"></label>\n  <label>Range: <input type="range"></label>\n</div>`
+            },
+            {
+                cat: "Forms",
+                name: "Fieldset",
+                desc: "Used to group related elements in a form, often with a <code>legend</code> caption.",
+                html: `<fieldset style="border:1px solid #ccc; border-radius:4px; padding:15px;">\n  <legend style="padding:0 5px; font-weight:bold;">Personal Info</legend>\n  <input type="text" placeholder="First Name">\n  <input type="text" placeholder="Last Name">\n</fieldset>`
+            },
+
+            // --- CODE ---
+            {
+                cat: "Code",
+                name: "Code Blocks",
+                desc: "Combine <code>pre</code> and <code>code</code>. Updated to dark mode for better contrast against white backgrounds.",
+                html: `<pre style="background:#1e1e1e; color:#d4d4d4; padding:15px; border-radius:6px; overflow-x:auto; border:1px solid #333;"><code>function greet(name) {\n  return "Hello " + name;\n}</code></pre>`
+            },
+            {
+                cat: "Code",
+                name: "Inline Code",
+                desc: "Use <code>code</code> for short snippets within a sentence.",
+                html: `<p>You should use the <code>console.log()</code> function to debug.</p>`
+            },
+            {
+                cat: "Code",
+                name: "Keyboard Input",
+                desc: "The <code>kbd</code> tag represents user input, like keyboard shortcuts.",
+                html: `<p>To save, press <kbd style="background:#eee; padding:2px 5px; border-radius:4px; border:1px solid #ccc;">Ctrl</kbd> + <kbd style="background:#eee; padding:2px 5px; border-radius:4px; border:1px solid #ccc;">S</kbd></p>`
+            },
+            {
+                cat: "Code",
+                name: "Variables",
+                desc: "The <code>var</code> tag is used to define a variable in a mathematical expression or programming context.",
+                html: `<p>The area of a triangle is: 1/2 x <var>b</var> x <var>h</var></p>`
+            },
+
+            // --- LISTS ---
+            { 
+                cat: "Lists", 
+                name: "Lists (UL / OL)", 
+                desc: "Use <code>ul</code> for bullets and <code>ol</code> for numbered steps.",
+                html: `<strong>Unordered:</strong>\n<ul>\n  <li>Apples</li>\n  <li>Bananas</li>\n</ul>\n<strong>Ordered:</strong>\n<ol>\n  <li>Draft</li>\n  <li>Review</li>\n  <li>Publish</li>\n</ol>` 
+            },
+            {
+                cat: "Lists",
+                name: "Description List",
+                desc: "A list of terms (<code>dt</code>) and descriptions (<code>dd</code>).",
+                html: `<dl>\n  <dt style="font-weight:bold;">HTML</dt>\n  <dd>- HyperText Markup Language</dd>\n  <dt style="font-weight:bold;">CSS</dt>\n  <dd>- Cascading Style Sheets</dd>\n</dl>`
+            },
+
+            // --- MEDIA ---
+            { 
+                cat: "Media", 
+                name: "Images", 
+                desc: "Images require a <code>src</code> (URL) and an <code>alt</code> description for accessibility.",
+                html: `<img src="https://placehold.co/400x200" alt="Placeholder" style="max-width:100%; border-radius:8px;">` 
+            },
+            {
+                cat: "Media",
+                name: "Figure",
+                desc: "Used to group media with a caption (<code>figcaption</code>).",
+                html: `<figure style="margin:0; background:#f9fafb; padding:10px; border-radius:8px; display:inline-block;">\n  <img src="https://placehold.co/150" alt="Small Box" style="border-radius:4px;">\n  <figcaption style="font-size:0.8rem; color:#666; margin-top:5px; text-align:center;">Fig.1: A generic box</figcaption>\n</figure>`
+            },
+            { 
+                cat: "Media", 
+                name: "Progress & Meter", 
+                desc: "<code>progress</code> shows task completion (0-100%). <code>meter</code> shows a scalar measurement (like disk usage).",
+                html: `Progress: <progress value="70" max="100"></progress><br>\nMeter: <meter value="0.6">60%</meter>` 
+            },
+            {
+                cat: "Media",
+                name: "Video Placeholder",
+                desc: "Embeds a video player. Requires a <code>src</code>.",
+                html: `<video width="320" height="240" controls style="background:#000; border-radius:8px; max-width: 100%; height: auto;">\n  <source src="movie.mp4" type="video/mp4">\n  Your browser does not support the video tag.\n</video>`
+            },
+
+            // --- TABLES ---
+            { 
+                cat: "Tables", 
+                name: "Data Table", 
+                desc: "Use <code>thead</code> for column titles and <code>tbody</code> for data rows.",
+                html: `<table style="width:100%; border-collapse: collapse; text-align:left;">\n  <thead>\n    <tr style="border-bottom:2px solid #ddd;">\n      <th style="padding:10px;">ID</th>\n      <th style="padding:10px;">Name</th>\n      <th style="padding:10px;">Role</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr style="border-bottom:1px solid #eee;">\n      <td style="padding:10px;">001</td>\n      <td style="padding:10px;">Alice</td>\n      <td style="padding:10px;">Dev</td>\n    </tr>\n    <tr>\n      <td style="padding:10px;">002</td>\n      <td style="padding:10px;">Bob</td>\n      <td style="padding:10px;">Design</td>\n    </tr>\n  </tbody>\n</table>` 
+            },
+
+            // --- INTERACT ---
+            { 
+                cat: "Interact", 
+                name: "Details (Accordion)", 
+                desc: "A native way to hide/show content. The <code>summary</code> tag is the clickable header.",
+                html: `<details style="border:1px solid #ccc; padding:10px; border-radius:6px; background:#fff;">\n  <summary style="cursor:pointer; font-weight:600;">Click to reveal secret</summary>\n  <p style="margin-top:10px; color:#555;">Here is the hidden content! No JavaScript required.</p>\n</details>` 
+            },
+            {
+                cat: "Interact",
+                name: "Dialog (Modal)",
+                desc: "A native popup window. Requires JS to open (<code>showModal()</code>), but provides built-in accessibility.",
+                html: `<button onclick="document.getElementById('demoDialog').showModal()">Open Dialog</button>\n<dialog id="demoDialog" style="border:1px solid #ccc; border-radius:8px; padding:20px; box-shadow:0 10px 25px rgba(0,0,0,0.1);">\n  <h3 style="margin-top:0;">Native Modal</h3>\n  <p>This is a native dialog element.</p>\n  <button onclick="document.getElementById('demoDialog').close()">Close</button>\n</dialog>`
+            },
+            {
+                cat: "Interact",
+                name: "Hyperlinks",
+                desc: "The <code>a</code> tag is the core of the web. Use <code>target='_blank'</code> to open in a new tab.",
+                html: `<a href="#" style="color:#2563eb; text-decoration:underline;">Standard Link</a>\n<br>\n<a href="#" style="text-decoration:none; color:#2563eb;">No Underline Link</a>`
+            },
+
+            // --- STRUCTURE ---
+            {
+                cat: "Structure",
+                name: "Div & Span",
+                desc: "The building blocks. <code>div</code> is a block-level container. <code>span</code> is inline.",
+                html: `<div style="background:#ddd; padding:5px; margin-bottom:5px;">I am a Div (Block)</div>\nText with a <span style="background:yellow;">Span (Inline)</span> inside.`
+            },
+            {
+                cat: "Structure",
+                name: "Horizontal Rule",
+                desc: "A thematic break between paragraph-level elements (a horizontal line).",
+                html: `<p>Section A</p>\n<hr style="border:0; border-top:1px solid #ccc; margin:15px 0;">\n<p>Section B</p>`
+            }
+        ];
+
+        const container = document.getElementById('mainContainer');
+        const filterContainer = document.getElementById('filterContainer');
+        const searchInput = document.getElementById('searchInput');
+
+        let activeCategory = 'All';
+
+        // === 1. INIT FILTERS (Sorted) ===
+        function initFilters() {
+            // Get categories, remove duplicates.
+            const cats = [...new Set(components.map(c => c.cat))];
+            
+            // Sort A-Z
+            cats.sort();
+            
+            // Construct final array: All -> Patterns -> A-Z
+            const finalCats = ['All', ...cats];
+            
+            finalCats.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = `filter-btn ${cat === activeCategory ? 'active' : ''}`;
+                btn.innerText = cat;
+                
+                // Dynamic Colour Application
+                if (cat !== 'All') {
+                    const colorVar = categoryColors[cat] || 'var(--col-default)';
+                    
+                    // Mouseover hover effect
+                    btn.onmouseenter = () => {
+                        if (activeCategory !== cat) {
+                           btn.style.background = '#e5e7eb';
+                           btn.style.color = colorVar; 
+                        }
+                    };
+                    btn.onmouseleave = () => {
+                        if (activeCategory !== cat) {
+                            btn.style.background = '#f3f4f6';
+                            btn.style.color = '#555';
+                        }
+                    };
+                }
+
+                btn.onclick = () => {
+                    // Reset all buttons
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('active');
+                        b.style.background = '#f3f4f6'; 
+                        b.style.color = '#555';
+                    });
+                    
+                    // Activate this button
+                    btn.classList.add('active');
+                    activeCategory = cat;
+                    
+                    // Apply active colour
+                    const colorVar = categoryColors[cat] || '#333';
+                    if(cat === 'All') {
+                        btn.style.background = '#333';
+                        btn.style.color = '#fff';
+                    } else {
+                        btn.style.background = colorVar;
+                        btn.style.color = '#fff';
+                    }
+
+                    render();
+                };
+                
+                filterContainer.appendChild(btn);
+            });
+            
+            // Set initial state for "All" button
+            const allBtn = filterContainer.querySelector('.filter-btn'); // first one is All
+            allBtn.style.background = '#333';
+            allBtn.style.color = '#fff';
+        }
+
+        // === 2. RENDER ===
+        function render() {
+            const searchText = searchInput.value.toLowerCase();
+            const rows = document.querySelectorAll('.component-wrapper');
+            rows.forEach(r => r.remove());
+
+            components.forEach(comp => {
+                const matchesCategory = activeCategory === 'All' || comp.cat === activeCategory;
+                const matchesSearch = comp.name.toLowerCase().includes(searchText) || comp.html.toLowerCase().includes(searchText);
+
+                if (matchesCategory && matchesSearch) {
+                    createRow(comp);
+                }
+            });
+        }
+
+        // === 3. CREATE DOM ===
+        function createRow(comp) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'component-wrapper';
+            
+            // Get category colour
+            const catColor = categoryColors[comp.cat] || 'var(--col-default)';
+
+            // Escape HTML for Code Block
+            const escaped = comp.html.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+            wrapper.innerHTML = `
+                <div class="split-row">
+                    <div class="code-box">
+                        <div class="code-header">
+                            <div style="display:flex; align-items:center;">
+                                <span class="comp-title">${comp.name}</span>
+                                <span class="comp-cat" style="background:${catColor};">${comp.cat}</span>
+                            </div>
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <pre><code>${escaped}</code></pre>
+                    </div>
+
+                    <div class="preview-box">
+                        <div class="preview-content">
+                            ${comp.html}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="desc-box">
+                    <span class="desc-icon" style="color:${catColor};">WHEN TO USE</span>
+                    <span>${comp.desc}</span>
+                </div>
+            `;
+            container.appendChild(wrapper);
+        }
+
+        // === 4. COPY UTILITY ===
+        function copyCode(btn) {
+            const codeBox = btn.closest('.code-box');
+            const code = codeBox.querySelector('code').innerText;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const original = btn.innerText;
+                btn.innerText = "Copied!";
+                btn.style.borderColor = "#fff";
+                btn.style.color = "#fff";
+                
+                setTimeout(() => {
+                    btn.innerText = original;
+                    btn.style.borderColor = "#555";
+                    btn.style.color = "#aaa";
+                }, 2000);
+            });
+        }
+
+        // === BOOTSTRAP ===
+        initFilters();
+        render();
+
+        searchInput.addEventListener('input', render);
+
+    </script>
+</body>
+</html>
